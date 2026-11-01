@@ -11,7 +11,7 @@ export default function Scroller({ className, bg, children }) {
   }
   useEffect(check) // content changes on every render, so re-measure
   return (
-    <div className="scroll-wrap" style={{ '--bg': bg }}>
+    <div className="scroll-wrap" style={{ '--fade': bg }}>
       <div ref={ref} className={className} onScroll={check}>{children}</div>
       {more && <div className="fade"><ChevronDown size={28} /></div>}
     </div>

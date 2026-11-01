@@ -14,8 +14,9 @@ const clickSound = (e) => {
 }
 
 // Shared shell for every UI: `children` is the left-hand shop area, the cart/rewards/pay flow is on the right.
+// `theme` is a class from the UI's own css that sets --bg, --accent, --pay and --hi.
 // lines: [{ uid, name, sub?, price (cents), icon, color }].
-export default function CheckoutLayout({ children, lines, onRemove, onPay }) {
+export default function CheckoutLayout({ theme, children, lines, onRemove, onPay }) {
   const [done, setDone] = useState(false)
   const [phone, setPhone] = useState('') // set once rewards are applied
   const [entering, setEntering] = useState(null) // digits typed in the modal, null = closed
@@ -31,12 +32,12 @@ export default function CheckoutLayout({ children, lines, onRemove, onPay }) {
   }
 
   return (
-    <main className="app" onClickCapture={clickSound}>
+    <main className={`app ${theme}`} onClickCapture={clickSound}>
       <section className="shop">{children}</section>
 
       <aside className="cart">
         <h1>Checkout</h1>
-        <Scroller className="lines" bg="#2e2b42">
+        <Scroller className="lines" bg="var(--panel)">
           {!lines.length && <ShoppingCart className="empty-cart" size={72} />}
           {lines.map(({ uid, name, sub, price, icon: Icon, color }) => (
             <div key={uid} className="line">

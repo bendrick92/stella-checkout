@@ -22,7 +22,7 @@ export default function Grocery({ nav }) {
   const remove = (uid) => setCart((c) => c.filter((l) => l.uid !== uid))
 
   return (
-    <CheckoutLayout lines={cart} onRemove={remove} onPay={() => setCart([])}>
+    <CheckoutLayout theme="grocery" lines={cart} onRemove={remove} onPay={() => setCart([])}>
       <div className="top">
         {nav}
         <label className="search">
@@ -51,7 +51,7 @@ export default function Grocery({ nav }) {
         ))}
       </div>
 
-      <Scroller className="items" bg="#231f33">
+      <Scroller className="items" bg="var(--bg)">
         {shown.map((item) => {
           const { id, name, price, cat: c, icon: Icon } = item
           return (

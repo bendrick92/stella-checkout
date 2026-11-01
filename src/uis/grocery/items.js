@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 
 export const CATEGORIES = [
-  { id: 'general', name: 'General', icon: ShoppingCart, color: '#a06cf0' },
+  { id: 'general', name: 'General', icon: ShoppingCart, color: '#b88cff' },
   { id: 'fruit', name: 'Fruits', icon: Grape, color: '#6cb4f8' },
   { id: 'veg', name: 'Veggies', icon: Carrot, color: '#f8b86c' },
   { id: 'pastry', name: 'Pastry', icon: Croissant, color: '#e8c48f' },

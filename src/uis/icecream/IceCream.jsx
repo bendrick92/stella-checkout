@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { ArrowLeft, Check, IceCreamCone, Minus } from 'lucide-react'
+import { Check, IceCreamCone, Minus } from 'lucide-react'
 import CheckoutLayout from '../../shared/CheckoutLayout'
+import StepFlow from '../../shared/StepFlow'
 import { usd } from '../../shared/format'
 import { CONTAINERS, FLAVORS, SCOOP_PRICE, TOPPINGS, TOPPING_PRICE } from './menu'
 import './icecream.css'
@@ -41,19 +42,20 @@ export default function IceCream({ nav }) {
 
   return (
     <CheckoutLayout
+      theme="icecream"
       lines={cart}
       onRemove={(u) => setCart((l) => l.filter((x) => x.uid !== u))}
       onPay={() => { setCart([]); reset() }}
     >
-      <div className="step-head">
-        {nav}
-        <div>
-          <div className="step-n">Step {step + 1} of {STEPS.length}</div>
-          <div className="step-t">{STEPS[step]}</div>
-        </div>
-      </div>
-
-      <div className={step ? 'choices' : 'choices big'}>
+      <StepFlow
+        nav={nav}
+        titles={STEPS}
+        step={step}
+        setStep={setStep}
+        ready={ready}
+        nextLabel={`${last ? 'Add to order' : 'Next'} · ${usd(price)}`}
+        onNext={last ? addToOrder : () => setStep(step + 1)}
+      >
         {step === 0 && CONTAINERS.map(({ id, name, price: p, color, icon: Icon }) => (
           <button key={id} className={container === id ? 'item pick on' : 'item pick'} style={{ color }} onClick={() => { setContainer(id); setStep(1) }}>
             <Icon size={44} />
@@ -87,16 +89,7 @@ export default function IceCream({ nav }) {
             </button>
           )
         })}
-      </div>
-
-      {step > 0 && (
-        <div className="foot">
-          <button className="back" onClick={() => setStep(step - 1)}><ArrowLeft size={26} />Back</button>
-          <button className="pay next" disabled={!ready} onClick={last ? addToOrder : () => setStep(step + 1)}>
-            {last ? `Add to order · ${usd(price)}` : `Next · ${usd(price)}`}
-          </button>
-        </div>
-      )}
+      </StepFlow>
     </CheckoutLayout>
   )
 }

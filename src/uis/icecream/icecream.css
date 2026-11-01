@@ -1,26 +1,13 @@
-.step-head { display: flex; align-items: center; gap: 10px; flex-shrink: 0; height: 52px; }
-.step-n { color: #9aa0b8; font-size: 14px; }
-.step-t { font-size: 20px; font-weight: 700; }
-
-.choices {
-  flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 8px; align-content: start; grid-auto-rows: 104px;
-}
-.choices.big { grid-auto-rows: 124px; }
-.pick { height: 100%; position: relative; }
-.pick.on { outline: 4px solid currentColor; }
-.tick { position: absolute; top: 6px; right: 6px; }
 .flavor { position: relative; }
 .flavor .pick { width: 100%; }
 .badge {
   position: absolute; top: 6px; right: 8px; min-width: 26px; height: 26px; border-radius: 13px;
   display: grid; place-items: center; background: currentColor; font-weight: 800; font-size: 16px;
 }
-.badge::after { content: attr(data-n); color: #231f33; }
+.badge::after { content: attr(data-n); color: var(--btn); }
 .less {
   position: absolute; bottom: 6px; right: 6px; min-width: 0; width: 34px; height: 34px;
-  display: grid; place-items: center; padding: 0; border-radius: 50%; background: #231f33;
+  display: grid; place-items: center; padding: 0; border-radius: 50%; background: var(--panel);
 }
-.foot { display: flex; gap: 8px; flex-shrink: 0; }
-.foot button { flex: 1; min-width: 0; height: 56px; font-size: 22px; }
-.back { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; }
+
+.app.icecream { --bg: #b83c7e; --accent: #3a55c8; --pay: #6a3fd0; --hi: #ffe9a0; }
