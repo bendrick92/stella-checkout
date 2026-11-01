@@ -21,25 +21,7 @@ button:active { transform: scale(0.95); }
 
 .shop { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 
-.search {
-  display: flex; align-items: center; gap: 10px;
-  height: 52px; padding: 0 16px; border-radius: 26px;
-  background: #35324a; flex-shrink: 0;
-}
-.search input {
-  flex: 1; min-width: 0; height: 100%;
-  background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: 22px;
-  user-select: text; cursor: text;
-}
 
-.cats { display: flex; gap: 6px; flex-shrink: 0; }
-.cat {
-  flex: 1; height: 76px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px;
-  font-size: 15px; font-weight: 600;
-}
-.cat span { color: #fff; }
-.cat.on { outline: 4px solid currentColor; }
 
 .items {
   height: 100%; overflow-y: auto; /* touch-scrolls; no scrollbar needed */
@@ -47,9 +29,11 @@ button:active { transform: scale(0.95); }
   scrollbar-width: none;
 }
 .item {
-  height: 116px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px;
+  height: 124px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px; padding: 12px 8px;
+  text-align: center; line-height: 1.1;
 }
+.item svg { flex-shrink: 0; }
 .item .name { color: #fff; font-weight: 700; font-size: 19px; }
 .item .price { color: #9aa0b8; font-size: 16px; }
 .empty { grid-column: 1 / -1; text-align: center; color: #9aa0b8; font-size: 24px; }
@@ -59,6 +43,10 @@ button:active { transform: scale(0.95); }
   border-radius: 24px; background: #2e2b42; display: flex; flex-direction: column;
 }
 .cart h1 { margin: 0 0 6px; font-size: 26px; text-align: center; }
+.nav { display: flex; gap: 4px; flex-shrink: 0; }
+.nav button { min-width: 0; width: 52px; height: 52px; display: grid; place-items: center; padding: 0; border-radius: 14px; color: #9aa0b8; }
+.nav button.on { background: #5b3fa8; color: #fff; }
+.lname small { display: block; color: #9aa0b8; font-size: 12px; white-space: normal; line-height: 1.2; }
 .lines { height: 100%; overflow-y: auto; scrollbar-width: none; }
 .empty-cart { display: block; margin: 70px auto; color: #4a4663; }
 .line {

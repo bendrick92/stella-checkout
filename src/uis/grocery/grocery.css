@@ -1,0 +1,20 @@
+.top { display: flex; gap: 8px; flex-shrink: 0; }
+.search {
+  flex: 1; min-width: 0;
+  display: flex; align-items: center; gap: 10px;
+  height: 52px; padding: 0 16px; border-radius: 26px;
+  background: #35324a; flex-shrink: 0;
+}
+.search input {
+  flex: 1; min-width: 0; height: 100%;
+  background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: 22px;
+  user-select: text; cursor: text;
+}
+.cats { display: flex; gap: 6px; flex-shrink: 0; }
+.cat {
+  flex: 1; height: 76px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  font-size: 15px; font-weight: 600;
+}
+.cat span { color: #fff; }
+.cat.on { outline: 4px solid currentColor; }

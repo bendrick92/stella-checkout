@@ -7,9 +7,6 @@ import {
   Vegan, CakeSlice,
 } from 'lucide-react'
 
-// Rewards members get this fraction off every item (any 10-digit phone number is accepted).
-export const REWARDS_DISCOUNT = 0.1
-
 export const CATEGORIES = [
   { id: 'general', name: 'General', icon: ShoppingCart, color: '#a06cf0' },
   { id: 'fruit', name: 'Fruits', icon: Grape, color: '#6cb4f8' },
