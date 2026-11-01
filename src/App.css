@@ -1,0 +1,101 @@
+/* Layout is fixed for the 800x480 Pi screen. */
+.app {
+  width: 800px;
+  height: 480px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #231f33;
+  font-size: 18px;
+}
+
+button {
+  font: inherit;
+  border: 0;
+  border-radius: 14px;
+  background: #35324a;
+  color: #fff;
+}
+button:active { transform: scale(0.95); }
+
+.shop { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.search {
+  display: flex; align-items: center; gap: 10px;
+  height: 52px; padding: 0 16px; border-radius: 26px;
+  background: #35324a; flex-shrink: 0;
+}
+.search input {
+  flex: 1; min-width: 0; height: 100%;
+  background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: 22px;
+  user-select: text; cursor: text;
+}
+
+.cats { display: flex; gap: 6px; flex-shrink: 0; }
+.cat {
+  flex: 1; height: 76px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  font-size: 15px; font-weight: 600;
+}
+.cat span { color: #fff; }
+.cat.on { outline: 4px solid currentColor; }
+
+.items {
+  height: 100%; overflow-y: auto; /* touch-scrolls; no scrollbar needed */
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start;
+  scrollbar-width: none;
+}
+.item {
+  height: 116px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+}
+.item .name { color: #fff; font-weight: 700; font-size: 19px; }
+.item .price { color: #9aa0b8; font-size: 16px; }
+.empty { grid-column: 1 / -1; text-align: center; color: #9aa0b8; font-size: 24px; }
+
+.cart {
+  width: 280px; flex-shrink: 0; box-sizing: border-box; padding: 10px;
+  border-radius: 24px; background: #2e2b42; display: flex; flex-direction: column;
+}
+.cart h1 { margin: 0 0 6px; font-size: 26px; text-align: center; }
+.lines { height: 100%; overflow-y: auto; scrollbar-width: none; }
+.empty-cart { display: block; margin: 70px auto; color: #4a4663; }
+.line {
+  display: flex; align-items: center; gap: 6px; padding: 6px 0;
+  border-bottom: 1px solid #3f3b57; font-size: 16px;
+}
+.lname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qty { min-width: 0; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border-radius: 50%; }
+.lprice { width: 56px; text-align: right; color: #6cb4f8; font-weight: 700; }
+.total { display: flex; justify-content: space-between; font-size: 24px; font-weight: 700; padding: 8px 4px; }
+.pay { height: 60px; background: #2f80ff; font-size: 24px; font-weight: 700; }
+.pay:disabled { background: #3a4a6a; color: #8c96b0; }
+
+.thanks {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: rgba(35, 31, 51, 0.96); font-size: 56px; font-weight: 800;
+}
+
+.rewards { height: 44px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; font-weight: 700; background: #5b3fa8; }
+.lprice { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+
+.modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, 0.7); }
+.keypad { position: relative; width: 340px; padding: 12px; border-radius: 24px; background: #2e2b42; }
+.keypad h2 { margin: 0 0 8px; font-size: 20px; text-align: center; }
+.close { position: absolute; top: 8px; right: 8px; min-width: 0; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%; }
+.digits { height: 52px; display: grid; place-items: center; margin-bottom: 8px; border-radius: 14px; background: #231f33; font-size: 32px; font-weight: 700; letter-spacing: 2px; }
+.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.keys button { height: 64px; display: grid; place-items: center; font-size: 30px; font-weight: 700; }
+.keys .ok { background: #2f80ff; font-size: 20px; }
+.keys .ok:disabled { background: #3a4a6a; color: #8c96b0; }
+
+.scroll-wrap { position: relative; flex: 1; min-height: 0; }
+.fade {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 44px; pointer-events: none;
+  display: flex; align-items: flex-end; justify-content: center; color: #fff;
+  background: linear-gradient(transparent, var(--bg) 85%);
+}
+.rewards { padding: 0 14px; }
+.rewards.on { justify-content: space-between; }
+.rl { display: flex; align-items: center; gap: 8px; }
