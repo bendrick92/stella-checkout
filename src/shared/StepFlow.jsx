@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import './steps.css'
 
-// Left-hand pane for step-by-step UIs: header, a grid of choices (`.item.pick` buttons), and Back/Next.
+// Left-hand pane for step-by-step UIs: header, a grid of choices (`.item.pick` buttons), and Back/Next (Next only when `nextLabel` is given).
 // Step 0 has no footer (its choices advance on tap) and uses taller tiles.
 export default function StepFlow({ nav, titles, step, setStep, ready, nextLabel, onNext, children }) {
   return (
@@ -19,7 +19,7 @@ export default function StepFlow({ nav, titles, step, setStep, ready, nextLabel,
       {step > 0 && (
         <div className="foot">
           <button className="back" onClick={() => setStep(step - 1)}><ArrowLeft size={26} />Back</button>
-          <button className="pay next" disabled={!ready} onClick={onNext}>{nextLabel}</button>
+          {nextLabel && <button className="pay next" disabled={!ready} onClick={onNext}>{nextLabel}</button>}
         </div>
       )}
     </>

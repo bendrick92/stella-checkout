@@ -68,7 +68,6 @@ button:active { transform: scale(0.95); }
   background: var(--bg); font-size: 56px; font-weight: 800;
 }
 
-.rewards { height: 44px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; font-weight: 700; background: var(--accent); }
 .lprice { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
 
 .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, 0.7); }
@@ -78,8 +77,6 @@ button:active { transform: scale(0.95); }
 .digits { height: 52px; display: grid; place-items: center; margin-bottom: 8px; border-radius: 14px; background: var(--bg); font-size: 32px; font-weight: 700; letter-spacing: 2px; }
 .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .keys button { height: 64px; display: grid; place-items: center; font-size: 30px; font-weight: 700; }
-.keys .ok { background: var(--pay); font-size: 20px; }
-.keys .ok:disabled { opacity: 0.45; }
 
 .scroll-wrap { position: relative; flex: 1; min-height: 0; }
 .fade {
@@ -87,6 +84,19 @@ button:active { transform: scale(0.95); }
   display: flex; align-items: flex-end; justify-content: center; color: #fff;
   background: linear-gradient(transparent, var(--fade) 85%);
 }
-.rewards { padding: 0 14px; }
-.rewards.on { justify-content: space-between; }
-.rl { display: flex; align-items: center; gap: 8px; }
+.submit { width: 100%; height: 56px; margin-top: 8px; background: var(--pay); font-size: 20px; font-weight: 700; }
+.submit:disabled { opacity: 0.45; }
+
+.preview { flex: 1; min-height: 0; display: grid; place-items: center; }
+.serving { width: 100%; height: 100%; }
+
+.review { width: 520px; }
+.review-body { display: flex; align-items: center; gap: 16px; margin: 8px 0 12px; }
+.review-pic { flex: 0 0 240px; height: 240px; }
+.review-body ul { margin: 0; padding: 0; list-style: none; font-size: 20px; display: grid; gap: 8px; }
+.review-body li { display: flex; align-items: center; gap: 8px; }
+.review-body small { display: block; color: var(--dim); font-size: 14px; }
+.review-btns { display: flex; gap: 8px; }
+.review-btns button { flex: 1; height: 60px; font-size: 22px; font-weight: 700; }
+.ticon { width: 40px; height: 40px; flex-shrink: 0; }
+.item .ticon { width: 56px; height: 56px; }
