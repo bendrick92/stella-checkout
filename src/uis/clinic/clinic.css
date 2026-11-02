@@ -1,0 +1,29 @@
+.app.clinic { --bg: #1f7a8c; --accent: #3a55c8; --pay: #c2410c; --hi: #bff5ee; }
+
+.clinic .name-row { display: flex; gap: 8px; }
+.clinic .name-input { flex: 1; min-width: 0; height: 64px; box-sizing: border-box; padding: 0 16px; border: 0; border-radius: 14px; background: var(--panel); color: #fff; font: inherit; font-size: 28px; font-weight: 700; user-select: text; -webkit-user-select: text; cursor: auto; }
+.clinic .name-input::placeholder { color: var(--dim); font-weight: 400; }
+.clinic .name-row .next { width: 140px; height: 64px; }
+
+
+.clinic .summary { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; align-items: center; text-align: center; }
+.clinic .summary .who { font-size: 44px; font-weight: 800; }
+.clinic .summary .why { display: flex; align-items: center; gap: 12px; font-size: 28px; color: var(--hi); font-weight: 700; }
+.clinic .foot { flex-shrink: 0; }
+.clinic .who-bar { flex-shrink: 0; display: flex; justify-content: space-between; font-size: 24px; font-weight: 800; padding: 0 4px; }
+
+.clinic .appt { height: 100%; overflow-y: auto; scrollbar-width: none; display: flex; flex-direction: column; gap: 10px; }
+.clinic .appt section { flex-shrink: 0; padding: 12px; border-radius: 14px; background: var(--panel); display: flex; flex-direction: column; gap: 10px; }
+.clinic .appt h3 { margin: 0; font-size: 22px; }
+.clinic .appt h3 b { color: var(--hi); }
+.clinic .stepper { display: flex; align-items: center; gap: 12px; }
+.clinic .stepper .lbl { width: 90px; font-size: 20px; }
+.clinic .stepper .val { flex: 1; text-align: center; font-size: 32px; font-weight: 800; }
+.clinic .stepper button { width: 80px; height: 64px; display: grid; place-items: center; padding: 0; }
+.clinic .pair { display: flex; gap: 10px; }
+.clinic .pair button { flex: 1; height: 72px; font-size: 24px; font-weight: 700; }
+.clinic .pair button.on { background: var(--pay); outline: 4px solid #fff; }
+.clinic input[type=range] { width: 100%; height: 64px; accent-color: var(--hi); }
+.clinic input[type=range]::-webkit-slider-thumb { width: 44px; height: 44px; }
+.clinic .sig { width: 100%; height: 160px; border-radius: 14px; background: var(--bg); touch-action: none; }
+.clinic .clear { height: 52px; font-size: 20px; }

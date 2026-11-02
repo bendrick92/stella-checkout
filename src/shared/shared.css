@@ -1,10 +1,10 @@
-/* Layout is fixed for the 800x480 Pi screen. */
+/* Fills the screen (Pi 800x480 or iPad). */
 .app {
   --panel: color-mix(in srgb, var(--bg) 72%, black);
   --btn: color-mix(in srgb, var(--bg) 62%, black);
   --dim: rgba(255, 255, 255, 0.88);
-  width: 800px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
   display: flex;
   gap: 8px;
   padding: 8px;
