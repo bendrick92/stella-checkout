@@ -104,7 +104,7 @@ export default function Class({ nav }) {
         )}
       </section>
 
-      {done && <div className="thanks" onClick={reset}>{here.length} {here.length === 1 ? 'kid' : 'kids'} here today! 🎉</div>}
+      {done && <div className="thanks" onClick={reset}>What a great class! 🎉</div>}
     </main>
   )
 }
