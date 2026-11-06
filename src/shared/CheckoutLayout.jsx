@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Delete, ShoppingCart, Trash2, X } from 'lucide-react'
+import { ShoppingCart, Trash2 } from 'lucide-react'
 import Scroller from './Scroller'
-import { fmtPhone, usd } from './format'
+import { usd } from './format'
+import PhonePad from './PhonePad'
 import { play } from './sfx'
 import './shared.css'
 
@@ -18,13 +19,13 @@ const clickSound = (e) => {
 export default function CheckoutLayout({ theme, children, lines, onRemove, onPay, preview, confirm }) {
   const [done, setDone] = useState(false)
   const [reviewing, setReviewing] = useState(false)
-  const [entering, setEntering] = useState(null) // rewards digits typed after Checkout, null = closed
+  const [entering, setEntering] = useState(false) // rewards keypad open after Checkout
 
   const total = lines.reduce((sum, l) => sum + l.price, 0)
 
   const pay = () => {
     onPay()
-    setEntering(null)
+    setEntering(false)
     setDone(true)
     setTimeout(() => setDone(false), 3000)
   }
@@ -50,7 +51,7 @@ export default function CheckoutLayout({ theme, children, lines, onRemove, onPay
           ))}
         </Scroller>}
         <div className="total"><span>Total</span><span>{usd(total)}</span></div>
-        <button className="pay" disabled={!lines.length} onClick={() => (confirm ? setReviewing(true) : setEntering(''))}>Checkout</button>
+        <button className="pay" disabled={!lines.length} onClick={() => (confirm ? setReviewing(true) : setEntering(true))}>Checkout</button>
       </aside>
 
       {reviewing && (
@@ -60,33 +61,13 @@ export default function CheckoutLayout({ theme, children, lines, onRemove, onPay
             {confirm}
             <div className="review-btns">
               <button onClick={() => setReviewing(false)}>Change it</button>
-              <button className="pay" onClick={() => { setReviewing(false); setEntering('') }}>Looks good!</button>
+              <button className="pay" onClick={() => { setReviewing(false); setEntering(true) }}>Looks good!</button>
             </div>
           </div>
         </div>
       )}
 
-      {entering !== null && (
-        <div className="modal">
-          <div className="keypad">
-            <button className="close" onClick={() => setEntering(null)}><X size={26} /></button>
-            <h2>Rewards phone number</h2>
-            <div className="digits">{fmtPhone(entering) || '___-___-____'}</div>
-            <div className="keys">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'].map((k) =>
-                k === 'del' ? (
-                  <button key={k} onClick={() => setEntering((e) => e.slice(0, -1))}><Delete size={28} /></button>
-                ) : k === '' ? (
-                  <span key="gap" />
-                ) : (
-                  <button key={k} onClick={() => setEntering((e) => (e + k).slice(0, 10))}>{k}</button>
-                ),
-              )}
-            </div>
-            <button className="submit" disabled={entering.length > 0 && entering.length < 10} onClick={pay}>Submit</button>
-          </div>
-        </div>
-      )}
+      {entering && <PhonePad onClose={() => setEntering(false)} onSubmit={pay} />}
 
       {done && <div className="thanks" onClick={() => setDone(false)}>Thank you! 🎉</div>}
     </main>

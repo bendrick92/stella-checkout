@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { BookOpen, ScanBarcode, Search, Trash2 } from 'lucide-react'
 import Scroller from '../../shared/Scroller'
+import PhonePad from '../../shared/PhonePad'
 import { play } from '../../shared/sfx'
 import { BOOKS, COLORS } from './books'
 import { startScanner } from './scanner'
@@ -13,6 +14,7 @@ const colorOf = (title) => COLORS[BOOKS.indexOf(title) % COLORS.length]
 export default function Library({ nav }) {
   const [query, setQuery] = useState('')
   const [list, setList] = useState([]) // titles scanned or searched in
+  const [step, setStep] = useState(null) // after Finish: 'phone' then 'receipt'
   const [done, setDone] = useState(false)
   const [listening, setListening] = useState(false)
   const [err, setErr] = useState('')
@@ -41,6 +43,7 @@ export default function Library({ nav }) {
   useEffect(() => () => stop.current?.(), [])
 
   const finish = () => {
+    setStep(null)
     play('checkout')
     doneRef.current = true
     setDone(true)
@@ -95,8 +98,21 @@ export default function Library({ nav }) {
             </div>
           ))}
         </Scroller>
-        <button className="pay" disabled={!list.length} onClick={finish}>Finish</button>
+        <button className="pay" disabled={!list.length} onClick={() => setStep('phone')}>Finish</button>
       </aside>
+
+      {step === 'phone' && <PhonePad onClose={() => setStep(null)} onSubmit={() => setStep('receipt')} />}
+      {step === 'receipt' && (
+        <div className="modal">
+          <div className="keypad review">
+            <h2>Would you like a receipt?</h2>
+            <div className="review-btns">
+              <button onClick={finish}>No thanks</button>
+              <button className="pay" onClick={finish}>Yes please!</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {done && <div className="thanks" onClick={() => setDone(false)}>Thank you! 🎉</div>}
     </main>

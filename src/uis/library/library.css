@@ -1,6 +1,6 @@
 .app.library { --bg: #8a4b2a; --accent: #2f6fb5; --pay: #1f7a4d; --hi: #ffe27a; }
 
-.library .scan { flex-shrink: 0; height: 52px; padding: 0 18px; display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 700; }
+.library .scan { flex-shrink: 0; height: 52px; padding: 0 18px; display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 700; }
 .library .scan.on { background: var(--pay); outline: 4px solid #fff; }
 .library .scanning {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
@@ -16,3 +16,5 @@
 }
 .library .results .item { height: 110px; }
 .library .lines .lname { white-space: normal; }
+.library .cart { width: 380px; }
+.library .scan { padding: 0 12px; }
