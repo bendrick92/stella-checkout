@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { IceCreamCone, Stethoscope, GraduationCap, Pizza as PizzaIcon, ShoppingBasket } from 'lucide-react'
+import { BookOpen, IceCreamCone, Stethoscope, GraduationCap, Pizza as PizzaIcon, ShoppingBasket } from 'lucide-react'
 import Grocery from './uis/grocery/Grocery'
 import IceCream from './uis/icecream/IceCream'
 import Pizza from './uis/pizza/Pizza'
 import Clinic from './uis/clinic/Clinic'
 import Class from './uis/class/Class'
+import Library from './uis/library/Library'
 
 // To add a UI: create it under uis/, render it inside CheckoutLayout, and list it here.
 const UIS = [
@@ -13,6 +14,7 @@ const UIS = [
   { id: 'pizza', name: 'Pizza', icon: PizzaIcon, Component: Pizza },
   { id: 'clinic', name: 'Doctor', icon: Stethoscope, Component: Clinic },
   { id: 'class', name: 'Class', icon: GraduationCap, Component: Class },
+  { id: 'library', name: 'Library', icon: BookOpen, Component: Library },
 ]
 
 export default function App() {
