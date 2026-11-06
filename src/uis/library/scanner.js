@@ -8,22 +8,25 @@ const FRAMES = 3 // consecutive loud frames (~50 ms) before it counts
 const COOLDOWN = 800 // ms; one beep must not add two books
 
 // db: AnalyserNode.getFloatFrequencyData output. Returns tone dB minus average surrounding dB.
-export function beepScore(db, binHz) {
+export function beepScore(db, binHz, floor = MIN_DB) {
   const bin = (hz) => Math.round(hz / binHz)
   let tone = -Infinity
   for (let i = bin(RANGE[0]); i <= bin(RANGE[1]); i++) tone = Math.max(tone, db[i])
   let sum = 0, n = 0
   for (const [a, b] of AROUND) for (let i = bin(a); i <= bin(b); i++) { sum += db[i]; n++ }
-  return tone < MIN_DB ? 0 : tone - sum / n
+  return tone < floor ? 0 : tone - sum / n
 }
 
 // Resolves to a stop function. Rejects if the mic is denied or unavailable.
-export async function startScanner(onBeep) {
+// onLevel(text): optional live readout of tone dB and score, for tuning on a new device.
+export async function startScanner(onBeep, onLevel) {
+  // Safari only lets an AudioContext run if it is created during the tap, before any await (iPad PWA stays silent otherwise)
+  const ctx = new AudioContext()
+  ctx.resume()
   // voice processing would filter out a short steady tone, so turn it all off
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
   })
-  const ctx = new AudioContext()
   await ctx.resume()
   const an = ctx.createAnalyser()
   an.fftSize = 4096
@@ -35,7 +38,9 @@ export async function startScanner(onBeep) {
   let raf, hits = 0, last = 0
   const tick = () => {
     an.getFloatFrequencyData(db)
-    hits = beepScore(db, binHz) > TONE_DB ? hits + 1 : 0
+    const score = beepScore(db, binHz)
+    onLevel?.(`${Math.round(Math.max(...db.slice(Math.round(RANGE[0] / binHz), Math.round(RANGE[1] / binHz) + 1)))} dB, score ${Math.round(score)}`)
+    hits = score > TONE_DB ? hits + 1 : 0
     const now = performance.now()
     if (hits >= FRAMES && now - last > COOLDOWN) { last = now; onBeep() }
     raf = requestAnimationFrame(tick)

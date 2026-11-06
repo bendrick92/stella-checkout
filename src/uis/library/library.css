@@ -18,3 +18,4 @@
 .library .lines .lname { white-space: normal; }
 .library .cart { width: 380px; }
 .library .scan { padding: 0 12px; }
+.library .scanning small { font-size: 14px; font-weight: 400; color: var(--dim); }

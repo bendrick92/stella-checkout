@@ -19,6 +19,7 @@ export default function Library({ nav }) {
   const [listening, setListening] = useState(false)
   const [err, setErr] = useState('')
   const stop = useRef(null)
+  const level = useRef(null)
   const doneRef = useRef(false) // the Finish jingle must not count as a scan
 
   const q = query.trim().toLowerCase()
@@ -38,7 +39,7 @@ export default function Library({ nav }) {
   const toggleListen = async () => {
     setErr('')
     if (stop.current) { stop.current(); stop.current = null; setListening(false); return }
-    try { stop.current = await startScanner(scan); setListening(true) } catch { setErr('Mic not available') }
+    try { stop.current = await startScanner(scan, (t) => { if (level.current) level.current.textContent = t }); setListening(true) } catch { setErr('Mic not available') }
   }
   useEffect(() => () => stop.current?.(), [])
 
@@ -73,6 +74,7 @@ export default function Library({ nav }) {
           <div className="scanning">
             <ScanBarcode size={72} />
             <span>Scan a book!</span>
+            <small ref={level} />
           </div>
         )}
         <div className="results">
